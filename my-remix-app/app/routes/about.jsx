@@ -9,13 +9,7 @@ export async function loader() {
   return json(await client.getPage("About"));
 }
 
-// export const meta = ({ data }) => {
-//   const { seoMetadata } = data;
-//   return {
-//     title: seoMetadata.title,
-//     description: seoMetadata.description,
-//   };
-// };
+
 
 export const richTextRenderOptions = {
   renderNode: {

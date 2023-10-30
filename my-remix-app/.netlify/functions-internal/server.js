@@ -88,7 +88,7 @@ function NavBar() {
     to: "/about",
     className: "mt-1 block py-1 underline-anim underline-animate sm:mt-0 sm:ml-4  text-primary"
   }, "About"), /* @__PURE__ */ React.createElement(import_react2.NavLink, {
-    to: "/talks",
+    to: "/promise",
     className: "mt-1 block py-1 underline-anim underline-animate sm:mt-0 sm:ml-4  text-primary"
   }, "Promise"), /* @__PURE__ */ React.createElement(import_react2.NavLink, {
     to: "/becomeAsponser",
@@ -97,12 +97,10 @@ function NavBar() {
 }
 
 // app/tailwind.css
-var tailwind_default = "/build/_assets/tailwind-IXQAU26Z.css";
+var tailwind_default = "/build/_assets/tailwind-4XYNMIBR.css";
 
 // route:/Users/arexkheyrdoon/Documents/GitHub/choices-choices-the-tech-stack/my-remix-app/app/root.jsx
-var links = () => [
-  { rel: "stylesheet", href: tailwind_default }
-];
+var links = () => [{ rel: "stylesheet", href: tailwind_default }];
 function App() {
   return /* @__PURE__ */ React.createElement("html", {
     lang: "en"
@@ -112,21 +110,18 @@ function App() {
     className: "fixed bottom-0 w-screen p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800"
   }, /* @__PURE__ */ React.createElement("span", {
     className: "text-sm text-gray-500 sm:text-center dark:text-gray-400"
-  }, "Created with ", /* @__PURE__ */ React.createElement("a", {
-    href: "https://remix.run/",
-    className: "hover:underline"
-  }, "Remix"), " and ", /* @__PURE__ */ React.createElement("a", {
-    href: "https://contentful.com/",
-    className: "hover:underline"
-  }, "Contentful")), /* @__PURE__ */ React.createElement("ul", {
+  }, "Home"), /* @__PURE__ */ React.createElement("ul", {
     className: "flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0"
   }, /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("a", {
     href: "https://www.contentful.com/remix-tutorial/",
     className: "mr-4 hover:underline md:mr-6 "
-  }, "Read More")), /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("a", {
+  }, "About")), /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("a", {
     href: "https://github.com/contentful/starter-remix-portfolio",
     className: "mr-4 hover:underline md:mr-6"
-  }, "GitHub")))), /* @__PURE__ */ React.createElement(import_react4.ScrollRestoration, null), /* @__PURE__ */ React.createElement(import_react4.Scripts, null), /* @__PURE__ */ React.createElement(import_react4.LiveReload, null)));
+  }, "Promise")), /* @__PURE__ */ React.createElement("li", null, /* @__PURE__ */ React.createElement("a", {
+    href: "https://github.com/contentful/starter-remix-portfolio",
+    className: "mr-4 hover:underline md:mr-6"
+  }, "Become a Sponser")))), /* @__PURE__ */ React.createElement(import_react4.ScrollRestoration, null), /* @__PURE__ */ React.createElement(import_react4.Scripts, null), /* @__PURE__ */ React.createElement(import_react4.LiveReload, null)));
 }
 
 // route:/Users/arexkheyrdoon/Documents/GitHub/choices-choices-the-tech-stack/my-remix-app/app/routes/becomeAsponser.jsx
@@ -187,9 +182,9 @@ async function getBecomeAsponser2() {
   });
   return Promise.all(formattedData);
 }
-async function getTalks() {
+async function getPromise() {
   return await (await (await apiCall(`{
-        talksCollection {
+        promiseCollection {
             items {
                 sys {
                     id
@@ -206,7 +201,7 @@ async function getTalks() {
                 }
             }
         }
-    }`)).json()).data.talksCollection.items;
+    }`)).json()).data.promiseCollection.items;
 }
 async function getPage(title) {
   return await (await (await apiCall(`
@@ -228,13 +223,7 @@ async function getPage(title) {
                 story
               }
             }
-            seoMetadata{
-              title
-              ogImage {
-                url
-              }
-              description
-            }
+           
           }
         }
       }
@@ -244,7 +233,7 @@ async function getPage(title) {
 }
 var client = {
   getBecomeAsponser: getBecomeAsponser2,
-  getTalks,
+  getPromise,
   getPage
 };
 
@@ -319,96 +308,32 @@ function becomeAsponser() {
   }))), (0, import_rich_text_react_renderer.documentToReactComponents)(project.desc.json, richTextRenderOptions))))));
 }
 
-// route:/Users/arexkheyrdoon/Documents/GitHub/choices-choices-the-tech-stack/my-remix-app/app/routes/about.jsx
-var about_exports = {};
-__export(about_exports, {
-  default: () => About,
-  loader: () => loader2,
-  richTextRenderOptions: () => richTextRenderOptions2
+// route:/Users/arexkheyrdoon/Documents/GitHub/choices-choices-the-tech-stack/my-remix-app/app/routes/promise.jsx
+var promise_exports = {};
+__export(promise_exports, {
+  default: () => Promise2,
+  loader: () => loader2
 });
 var import_node2 = require("@remix-run/node"), import_react6 = require("@remix-run/react");
-var import_rich_text_react_renderer2 = require("@contentful/rich-text-react-renderer"), import_rich_text_types2 = require("@contentful/rich-text-types");
+var import_framer_motion2 = require("framer-motion"), import_rich_text_react_renderer2 = require("@contentful/rich-text-react-renderer");
 async function loader2() {
-  return (0, import_node2.json)(await client.getPage("About"));
+  let promise = await client.getPromise(), page = await client.getPage("Promise");
+  return (0, import_node2.json)({ promise, page });
 }
-var richTextRenderOptions2 = {
-  renderNode: {
-    [import_rich_text_types2.INLINES.HYPERLINK]: (node, children) => {
-      let { data } = node, { uri } = data;
-      return /* @__PURE__ */ React.createElement("a", {
-        className: "text-primary underline dark:text-secondary",
-        target: "_blank",
-        href: uri
-      }, children[0]);
-    }
-  }
-};
-function About() {
-  let { description } = (0, import_react6.useLoaderData)();
-  return /* @__PURE__ */ React.createElement("div", {
-    className: "px-8 sm:px-0 sm:max-w-2xl mx-auto"
-  }, /* @__PURE__ */ React.createElement(Title, {
-    title: "About us"
-  }), /* @__PURE__ */ React.createElement("div", {
-    className: "mt-4 text-lg dark:text-gray-300"
-  }, (0, import_rich_text_react_renderer2.documentToReactComponents)(description.json, richTextRenderOptions2)));
-}
-
-// route:/Users/arexkheyrdoon/Documents/GitHub/choices-choices-the-tech-stack/my-remix-app/app/routes/index.jsx
-var routes_exports = {};
-__export(routes_exports, {
-  default: () => Index,
-  loader: () => loader3
-});
-var import_react_text_loop_next = require("react-text-loop-next"), import_framer_motion2 = require("framer-motion"), import_node3 = require("@remix-run/node"), import_react7 = require("@remix-run/react");
-var import_node4 = require("@remix-run/node");
-async function loader3() {
-  return (0, import_node3.json)(await client.getPage("Where The Legends Begin."));
-}
-function Index() {
-  let { title, rolesCollection, paragraphsCollection } = (0, import_react7.useLoaderData)(), roles = {};
-  rolesCollection.items.forEach((role) => {
-    Object.assign(roles, Object.fromEntries([Object.values(role)]));
-  });
-  let paragraphs = {};
-  return paragraphsCollection.items.forEach((paragraph) => {
-    Object.assign(paragraphs, Object.fromEntries([Object.values(paragraph)]));
-  }), /* @__PURE__ */ React.createElement("div", {
-    className: "text-center mt-24 sm:mt-24 dark:text-white"
-  }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", {
-    className: "text-3xl sm:text-6xl"
-  }, /* @__PURE__ */ React.createElement("span", {
-    className: "text-primary dark:text-secondary"
-  }, " ", title))), /* @__PURE__ */ React.createElement("div", null));
-}
-
-// route:/Users/arexkheyrdoon/Documents/GitHub/choices-choices-the-tech-stack/my-remix-app/app/routes/talks.jsx
-var talks_exports = {};
-__export(talks_exports, {
-  default: () => Talks,
-  loader: () => loader4
-});
-var import_node5 = require("@remix-run/node"), import_react8 = require("@remix-run/react");
-var import_framer_motion3 = require("framer-motion"), import_rich_text_react_renderer3 = require("@contentful/rich-text-react-renderer");
-async function loader4() {
-  let talks = await client.getTalks(), page = await client.getPage("Talks");
-  return (0, import_node5.json)({ talks, page });
-}
-function Talks() {
-  let { talks } = (0, import_react8.useLoaderData)();
+function Promise2() {
+  let { promise } = (0, import_react6.useLoaderData)();
   return /* @__PURE__ */ React.createElement("div", {
     className: "px-4 sm:px-48"
   }, /* @__PURE__ */ React.createElement(Title, {
-    title: "Talks",
-    emoji: "\u{1F399}"
+    title: "Promise"
   }), /* @__PURE__ */ React.createElement("div", {
     className: "grid gap-6 sm:grid-cols-3"
-  }, talks.map((item) => {
+  }, promise.map((item) => {
     let { link, sys, description, title, type, previewImage } = item;
     return /* @__PURE__ */ React.createElement("a", {
       href: link,
       key: sys.id
-    }, /* @__PURE__ */ React.createElement(import_framer_motion3.motion.div, {
+    }, /* @__PURE__ */ React.createElement(import_framer_motion2.motion.div, {
       className: "mt-8 max-w-sm rounded overflow-hidden shadow-lg bg-white cursor-pointer dark:bg-gray-700",
       whileHover: {
         scale: 1.05,
@@ -442,12 +367,75 @@ function Talks() {
       className: "px-6 py-4"
     }, /* @__PURE__ */ React.createElement("h2", {
       className: "font-semibold text-lg mb-2 dark:text-secondary"
-    }, title), /* @__PURE__ */ React.createElement("p", null, (0, import_rich_text_react_renderer3.documentToReactComponents)(description.json)))));
+    }, title), /* @__PURE__ */ React.createElement("p", null, (0, import_rich_text_react_renderer2.documentToReactComponents)(description.json)))));
   })));
 }
 
+// route:/Users/arexkheyrdoon/Documents/GitHub/choices-choices-the-tech-stack/my-remix-app/app/routes/about.jsx
+var about_exports = {};
+__export(about_exports, {
+  default: () => About,
+  loader: () => loader3,
+  richTextRenderOptions: () => richTextRenderOptions2
+});
+var import_node3 = require("@remix-run/node"), import_react7 = require("@remix-run/react");
+var import_rich_text_react_renderer3 = require("@contentful/rich-text-react-renderer"), import_rich_text_types2 = require("@contentful/rich-text-types");
+async function loader3() {
+  return (0, import_node3.json)(await client.getPage("About"));
+}
+var richTextRenderOptions2 = {
+  renderNode: {
+    [import_rich_text_types2.INLINES.HYPERLINK]: (node, children) => {
+      let { data } = node, { uri } = data;
+      return /* @__PURE__ */ React.createElement("a", {
+        className: "text-primary underline dark:text-secondary",
+        target: "_blank",
+        href: uri
+      }, children[0]);
+    }
+  }
+};
+function About() {
+  let { description } = (0, import_react7.useLoaderData)();
+  return /* @__PURE__ */ React.createElement("div", {
+    className: "px-8 sm:px-0 sm:max-w-2xl mx-auto"
+  }, /* @__PURE__ */ React.createElement(Title, {
+    title: "About us"
+  }), /* @__PURE__ */ React.createElement("div", {
+    className: "mt-4 text-lg dark:text-gray-300"
+  }, (0, import_rich_text_react_renderer3.documentToReactComponents)(description.json, richTextRenderOptions2)));
+}
+
+// route:/Users/arexkheyrdoon/Documents/GitHub/choices-choices-the-tech-stack/my-remix-app/app/routes/index.jsx
+var routes_exports = {};
+__export(routes_exports, {
+  default: () => Index,
+  loader: () => loader4
+});
+var import_react_text_loop_next = require("react-text-loop-next"), import_framer_motion3 = require("framer-motion"), import_node4 = require("@remix-run/node"), import_react8 = require("@remix-run/react");
+var import_node5 = require("@remix-run/node");
+async function loader4() {
+  return (0, import_node4.json)(await client.getPage("Where The Legends Begin."));
+}
+function Index() {
+  let { title, rolesCollection, paragraphsCollection } = (0, import_react8.useLoaderData)(), roles = {};
+  rolesCollection.items.forEach((role) => {
+    Object.assign(roles, Object.fromEntries([Object.values(role)]));
+  });
+  let paragraphs = {};
+  return paragraphsCollection.items.forEach((paragraph) => {
+    Object.assign(paragraphs, Object.fromEntries([Object.values(paragraph)]));
+  }), /* @__PURE__ */ React.createElement("div", {
+    className: "text-center mt-24 sm:mt-24 dark:text-white"
+  }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", {
+    className: "text-3xl sm:text-6xl"
+  }, /* @__PURE__ */ React.createElement("span", {
+    className: "text-primary dark:text-secondary"
+  }, " ", title))), /* @__PURE__ */ React.createElement("div", null));
+}
+
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "b736e100", entry: { module: "/build/entry.client-G4HRK2BS.js", imports: ["/build/_shared/chunk-U64CM4VG.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-CBURLTC5.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/about": { id: "routes/about", parentId: "root", path: "about", index: void 0, caseSensitive: void 0, module: "/build/routes/about-7JYGKK6W.js", imports: ["/build/_shared/chunk-7R5GNWZ3.js", "/build/_shared/chunk-6SVKOHRR.js", "/build/_shared/chunk-7OG5UDQ4.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/becomeAsponser": { id: "routes/becomeAsponser", parentId: "root", path: "becomeAsponser", index: void 0, caseSensitive: void 0, module: "/build/routes/becomeAsponser-H6LOBS7D.js", imports: ["/build/_shared/chunk-7R5GNWZ3.js", "/build/_shared/chunk-6SVKOHRR.js", "/build/_shared/chunk-7RS6C5QZ.js", "/build/_shared/chunk-7OG5UDQ4.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-QOFIL47T.js", imports: ["/build/_shared/chunk-7RS6C5QZ.js", "/build/_shared/chunk-7OG5UDQ4.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/talks": { id: "routes/talks", parentId: "root", path: "talks", index: void 0, caseSensitive: void 0, module: "/build/routes/talks-FFLDJ7LG.js", imports: ["/build/_shared/chunk-6SVKOHRR.js", "/build/_shared/chunk-7RS6C5QZ.js", "/build/_shared/chunk-7OG5UDQ4.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-B736E100.js" };
+var assets_manifest_default = { version: "f5b1367b", entry: { module: "/build/entry.client-WPTLBUS3.js", imports: ["/build/_shared/chunk-CYSTUDXI.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-GDZHROEG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/about": { id: "routes/about", parentId: "root", path: "about", index: void 0, caseSensitive: void 0, module: "/build/routes/about-JDFSN5AC.js", imports: ["/build/_shared/chunk-AU2LR63Y.js", "/build/_shared/chunk-OTWT6UXP.js", "/build/_shared/chunk-OJUC4AHW.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/becomeAsponser": { id: "routes/becomeAsponser", parentId: "root", path: "becomeAsponser", index: void 0, caseSensitive: void 0, module: "/build/routes/becomeAsponser-6GRSUFJD.js", imports: ["/build/_shared/chunk-AU2LR63Y.js", "/build/_shared/chunk-OTWT6UXP.js", "/build/_shared/chunk-VWYS4WKE.js", "/build/_shared/chunk-OJUC4AHW.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-56ROB5W2.js", imports: ["/build/_shared/chunk-VWYS4WKE.js", "/build/_shared/chunk-OJUC4AHW.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/promise": { id: "routes/promise", parentId: "root", path: "promise", index: void 0, caseSensitive: void 0, module: "/build/routes/promise-7332JAF7.js", imports: ["/build/_shared/chunk-OTWT6UXP.js", "/build/_shared/chunk-VWYS4WKE.js", "/build/_shared/chunk-OJUC4AHW.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-F5B1367B.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var entry = { module: entry_server_exports }, routes = {
@@ -467,6 +455,14 @@ var entry = { module: entry_server_exports }, routes = {
     caseSensitive: void 0,
     module: becomeAsponser_exports
   },
+  "routes/promise": {
+    id: "routes/promise",
+    parentId: "root",
+    path: "promise",
+    index: void 0,
+    caseSensitive: void 0,
+    module: promise_exports
+  },
   "routes/about": {
     id: "routes/about",
     parentId: "root",
@@ -482,14 +478,6 @@ var entry = { module: entry_server_exports }, routes = {
     index: !0,
     caseSensitive: void 0,
     module: routes_exports
-  },
-  "routes/talks": {
-    id: "routes/talks",
-    parentId: "root",
-    path: "talks",
-    index: void 0,
-    caseSensitive: void 0,
-    module: talks_exports
   }
 };
 module.exports = __toCommonJS(stdin_exports);

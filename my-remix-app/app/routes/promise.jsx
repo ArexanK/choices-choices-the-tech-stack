@@ -6,27 +6,19 @@ import { motion } from 'framer-motion';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export async function loader() {
-	const talks = await client.getTalks();
-	const page = await client.getPage("Talks")
-	return json({talks,page});
+	const promise = await client.getPromise();
+	const page = await client.getPage("Promise")
+	return json({promise, page});
 }
 
-// export const meta= ({data}) =>{
-// 	const {title, description, ogImage} = data.page.seoMetadata
-// 	return {
-// 		title,
-// 		description,
-// 		"og:image": `${ogImage.url}`
-// 	}
-// }
 
-export default function Talks() {
-    const {talks} = useLoaderData();
+export default function Promise() {
+    const {promise} = useLoaderData();
     return (
         <div className="px-4 sm:px-48">
-				<Title title="Talks" emoji="🎙" />
+				<Title title="Promise" />
 				<div className="grid gap-6 sm:grid-cols-3">
-					{talks.map((item) => {
+					{promise.map((item) => {
 						const { link, sys, description, title, type, previewImage } = item;
 						return (
 							<a

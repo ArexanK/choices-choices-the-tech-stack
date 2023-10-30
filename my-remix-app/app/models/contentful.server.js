@@ -51,9 +51,9 @@ async function getBecomeAsponser() {
   return Promise.all(formattedData); //javascript functie die meerdere beloftes tegerlijkertijd uitvoert
 }
 
-async function getTalks() {
+async function getPromise() {
   const query = `{
-        talksCollection {
+        promiseCollection {
             items {
                 sys {
                     id
@@ -73,59 +73,8 @@ async function getTalks() {
     }`;
   const response = await apiCall(query);
   const json = await response.json();
-  return await json.data.talksCollection.items;
+  return await json.data.promiseCollection.items;
 }
-
-// async function getAllBlogs() {
-//   const query = `
-//     {
-//         blogCollection(order:sys_firstPublishedAt_DESC) {
-//         items {
-//           title
-//           slug
-//           description
-//           tag
-//           sys {
-//             firstPublishedAt
-//           }
-//         }
-//       }
-//     }
-//     `;
-//   const response = await apiCall(query);
-//   const json = await response.json();
-//   return await json.data.blogCollection.items;
-// }
-
-// async function getSingleBlog(slug) {
-//   const query = `
-//     query($slug: String){
-//         blogCollection(where: {slug:$slug}) {
-//             items {
-//                 title
-//                 description
-//                 tag
-//                 canonicalUrl
-//                 blogBody {
-//                   json
-//                 }
-//                 sys {
-//                   publishedAt
-//                 }
-//                 openGraphImage {
-//                   url
-//                 }
-//               }
-//             }
-//     }
-//     `;
-//   const variables = {
-//     slug: slug,
-//   };
-//   const response = await apiCall(query, variables);
-//   const json = await response.json();
-//   return await json.data.blogCollection.items[0];
-// }
 
 async function getPage(title) {
   const query = `
@@ -147,13 +96,7 @@ async function getPage(title) {
                 story
               }
             }
-            seoMetadata{
-              title
-              ogImage {
-                url
-              }
-              description
-            }
+           
           }
         }
       }
@@ -168,8 +111,6 @@ async function getPage(title) {
 
 export const client = {
   getBecomeAsponser,
-  getTalks,
-  // getAllBlogs,
-  // getSingleBlog,
+  getPromise,
   getPage,
 };

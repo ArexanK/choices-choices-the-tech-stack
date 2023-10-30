@@ -12,14 +12,7 @@ export async function loader() {
   return json({ getBecomeAsponser, page });
 }
 
-// export const meta = ({ data }) => {
-//   const { title, description, ogImage } = data.page.seoMetadata;
-//   return {
-//     title,
-//     description,
-//     "og:image": `${ogImage.url}`,
-//   };
-// };
+
 
 export const richTextRenderOptions = {
   renderNode: {

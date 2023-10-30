@@ -52,7 +52,7 @@ export default function NavBar() {
             About
           </NavLink>
           <NavLink
-            to="/talks"
+            to="/promise"
             className="mt-1 block py-1 underline-anim underline-animate sm:mt-0 sm:ml-4  text-primary"
           >
             Promise

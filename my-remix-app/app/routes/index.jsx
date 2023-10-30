@@ -9,17 +9,6 @@ export async function loader() {
   return json(await client.getPage("Where The Legends Begin.")); //logo van de homepage
 }
 
-// export const meta = ({ data }) => {
-//   const { seoMetadata } = data;
-//   return {
-//     title: seoMetadata.title,
-//     description: seoMetadata.description,
-//     "og:image": `${seoMetadata.ogImage.url}`, //iframe?
-//   };
-// };
-
- 	
-
 
 export default function Index() {
   const { title, rolesCollection, paragraphsCollection } = useLoaderData();
